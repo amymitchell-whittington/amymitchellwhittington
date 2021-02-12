@@ -1,6 +1,6 @@
 theme: starter-academic
 title: Amy Mitchell-Whittington
-baseurl: '/'
+baseurl: 'https://amymitchell-whittington.netlify.app'
 copyright: '© Amy Mitchell-Whittington 2021'
 defaultContentLanguage: en
 hasCJKLanguage: no
