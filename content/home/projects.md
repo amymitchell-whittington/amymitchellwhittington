@@ -30,11 +30,11 @@ content:
   filter_button:
   - name: All
     tag: '*'
-  - name: Brisbane Times
+  - name: Brisbane Times [2015-2018]
     tag: Brisbane Times
-  - name: Blank Magazine
+  - name: Blank Magazine [2014-2015]
     tag: Blank Magazine
-  - name: Copywriting
+  - name: Copywriting [2018-]
     tag: Blacklane
 
 design:
