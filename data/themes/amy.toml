@@ -1,0 +1,30 @@
+# Theme metadata
+name = "amy"
+
+# Is theme light or dark?
+is_light = true
+
+# Primary
+primary = "#7ebc89"
+
+# Menu
+menu_primary = "#faedca"
+menu_text = "#fe5d26"
+menu_text_active = "#f2c078"
+menu_title = "#fe5d26"
+
+# Links
+link = "#7ebc89"
+link_hover = "#c1dbb3"
+link_decoration = "underline"
+
+# Home sections
+background = "#faedca"
+home_section_odd = "#faedca"
+home_section_even = "#faedca"
+
+[dark]
+  link = "#c1dbb3"
+  link_hover = "#fe5d26"
+
+# font = "rose"

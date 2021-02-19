@@ -1,0 +1,11 @@
+# Font style metadata
+name = "amy_font"
+
+# Optional Google font URL
+google_fonts = "Fira+Code|Inter|Miriam+Libre:wght@400;700|Karla|DM+Mono|Work+Sans|Calistoga"
+
+# Font families
+heading_font = "Calistoga"
+body_font = "Quicksand"
+nav_font = "Karla"
+mono_font = "DM Mono"
