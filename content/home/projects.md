@@ -36,6 +36,8 @@ content:
     tag: Blank Magazine
   - name: Copywriting [2018-]
     tag: Blacklane
+  - name: Video
+    tag: Video
 
 design:
   # Choose how many columns the section has. Valid values: '1' or '2'.
