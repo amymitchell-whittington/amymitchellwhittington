@@ -40,4 +40,4 @@ title: Amy Mitchell-Whittington
 ---
 
 
-Hi, and welcome to my personal site. I'm a freelance journalist currently working as an editorial manager at a startup based in Berlin. When I'm not writing, I'm learning R and working my way through [On Food and Cooking.](https://www.goodreads.com/book/show/101255.On_Food_and_Cooking)   
+Hi, and welcome to my personal site. I'm a freelance journalist currently working as a content marketing manager at a startup based in Berlin. When I'm not writing, I'm learning R and working my way through [On Food and Cooking.](https://www.goodreads.com/book/show/101255.On_Food_and_Cooking)   
