@@ -1,0 +1,184 @@
+---
+title: "Scooby Doo monster motives"
+author: "Amy Mitchell-Whittington"
+date: 2021-07-13T21:13:14-05:00
+categories: ["Tidy Tuesday"]
+tags: ["#TidyTuesday"]
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+summary: My first Tidy Tuesday submission - delving into the world of data viz.
+---
+
+### My first Tidy Tuesday submission
+
+These past few months I've been playing around a lot in RStudio.  
+
+I really wanted to get stuck into data visualizations, so I figured the best way would be to challenge myself weekly with [#TidyTuesday](https://github.com/rfordatascience/tidytuesday), a weekly data project in R from the R4DS community.  
+
+So, here's my first of *hopefully* many submissions. Luckily, I started off with a fun one - data from every single Scooby Doo episode and movie since 1969.  
+The dataset came from [Kaggle](https://www.kaggle.com/williamschooleman/scoobydoo-complete), manually aggregated by [plummye](https://www.kaggle.com/williamschooleman).  
+For this one, I wanted to see whether the motives changed for the Scooby Doo monsters over the decades using treemaps.  
+
+I also decided to try out gganimate for the first time with my treemaps - it's a little hectic :smile:.  
+
+![  ](https://raw.githubusercontent.com/amymitchell-whittington/TidyTuesday/main/2021/13-07-2021-scoobydoo/scoobymotives2.gif)
+
+### What were the Scooby Doo monster motives over the decades?
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(stringr)
+library(tidyverse)
+library(tidytuesdayR)
+library(ggplot2)
+library(dplyr)
+library(lubridate)
+library(treemap)
+library(gganimate)
+library(gapminder)
+library(treemapify)
+library(gifski)
+library(png)
+
+scoobydoo <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-07-13/scoobydoo.csv')
+
+scoobydoo$year <- year(scoobydoo$date_aired)
+
+```
+
+
+```{r motives, echo=FALSE, message=FALSE}
+
+total_motives <- scoobydoo %>%
+  select(year, motive) %>%
+  mutate(year = as.numeric(year)) %>%
+  filter(motive != "NULL") %>%
+  group_by(year, motive) %>%
+  summarize( count = n()) 
+  
+
+motive_1960s <- scoobydoo %>%
+  select(year, motive) %>%
+  filter(str_detect (year, "196")) %>%
+filter(motive != "NULL") %>%
+  arrange(motive, year) %>%
+  group_by(motive) %>%
+  summarise(total = n()) %>%
+  arrange(desc(total)) 
+
+motive_1970s <- scoobydoo %>%
+  select(year, motive) %>%
+  filter(str_detect (year, "197")) %>%
+filter(motive != "NULL") %>%
+  arrange(motive, year) %>%
+  group_by(motive) %>%
+  summarise(total = n()) %>%
+  arrange(desc(total))
+
+motive_1980s <- scoobydoo %>%
+  select(year, motive) %>%
+  filter(str_detect (year, "198")) %>%
+filter(motive != "NULL") %>%
+  arrange(motive, year) %>%
+  group_by(motive) %>%
+  summarise(total = n()) %>%
+  arrange(desc(total))
+
+motive_1990s <- scoobydoo %>%
+  select(year, motive) %>%
+  filter(str_detect (year, "199")) %>%
+filter(motive != "NULL") %>%
+  arrange(motive, year) %>%
+  group_by(motive) %>%
+  summarise(total = n()) %>%
+  arrange(desc(total))
+
+motive_2000s <- scoobydoo %>%
+  select(year, motive) %>%
+  filter(str_detect (year, "200")) %>%
+filter(motive != "NULL") %>%
+  arrange(motive, year) %>%
+  group_by(motive) %>%
+  summarise(total = n()) %>%
+  arrange(desc(total))
+
+motive_2010s <- scoobydoo %>%
+  select(year, motive) %>%
+  filter(str_detect (year, "201")) %>%
+filter(motive != "NULL") %>%
+  arrange(motive, year) %>%
+  group_by(motive) %>%
+  summarise(total = n()) %>%
+  arrange(desc(total))
+
+motive_2020s <- scoobydoo %>%
+  select(year, motive) %>%
+  filter(str_detect (year, "202")) %>%
+filter(motive != "NULL") %>%
+  arrange(motive, year) %>%
+  group_by(motive) %>%
+  summarise(total = n()) %>%
+  arrange(desc(total))
+
+```
+
+``` {r motive treemap, echo=FALSE}
+
+treemap(motive_1960s, 
+        index="motive",
+        vSize="total",
+        type="index",
+        title="Monster motives in the 1960s")
+
+treemap(motive_1970s, 
+        index="motive",
+        vSize="total",
+        type="index",
+        title="Monster motives in the 1970s")
+
+treemap(motive_1980s, 
+        index="motive",
+        vSize="total",
+        type="index",
+        title="Monster motives in the 1980s")
+
+treemap(motive_1990s, 
+        index="motive",
+        vSize="total",
+        type="index",
+        title="Monster motives in the 1990s")
+
+treemap(motive_2000s, 
+        index="motive",
+        vSize="total",
+        type="index",
+        title="Monster motives in the 2000s")
+
+treemap(motive_2010s, 
+        index="motive",
+        vSize="total",
+        type="index",
+        title="Monster motives in the 2010s")
+
+```
+
+``` {r animate treemap, include=FALSE, message=FALSE}
+
+p <- ggplot(total_motives, aes (
+            label = motive,
+            area=count,
+            fill=motive)) +
+  geom_treemap(layout = "fixed") +
+  theme(legend.position="none") +
+  geom_treemap_text(layout = "fixed", place = "centre", grow = TRUE, colour = "white") +
+  transition_manual(as.integer(year)) +
+   ease_aes('linear') +
+  labs(title = "Year: {current_frame}")
+
+
+anim_save("scoobymotives2.gif", p, fps = 2, nframes = 44)
+
+```

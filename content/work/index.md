@@ -1,4 +1,9 @@
 ---
+title: "Selected works"
+summary: "A collection of stories I've created across various sites."
+type: "widget_page"
+---
+
 # An instance of the Portfolio widget.
 # Documentation: https://wowchemy.com/docs/page-builder/
 widget: portfolio
@@ -7,7 +12,7 @@ widget: portfolio
 headless: true
 
 #activate widget? true/false
-active: false
+active: true
 
 # Order that this section appears on the page.
 weight: 60
@@ -30,11 +35,11 @@ content:
   filter_button:
   - name: All
     tag: '*'
-  - name: Brisbane Times [2015-2018]
+  - name: Brisbane Times
     tag: Brisbane Times
-  - name: Blank Magazine [2014-2015]
+  - name: Blank Magazine
     tag: Blank Magazine
-  - name: Copywriting [2018-]
+  - name: Copywriting
     tag: Blacklane
   - name: Video
     tag: Video
@@ -51,5 +56,5 @@ design:
   view: 3
 
   # For Showcase view, flip alternate rows?
-  flip_alt_rows: false
+  flip_alt_rows: true
 ---

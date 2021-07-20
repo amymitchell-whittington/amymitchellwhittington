@@ -9,14 +9,19 @@
   #weight = 10
 
 [[main]]
-  name = "Selected works"
-  url = "#projects"
-  weight = 20
+  #name = "Selected works"
+  #url = "#projects"
+  #weight = 20
 
 [[main]]
-  #name = "Blog"
-  #url = "#posts"
-  #weight = 30
+  name = "Visualizations"
+  url = "visualizations/"
+  weight = 3
+
+[[main]]
+  name = "Selected works"
+  url = "work/"
+  weight = 2
 
 [[main]]
   #name = "CV"

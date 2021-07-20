@@ -1,4 +1,10 @@
 ---
+title: "Data visualizations"
+summary: "A place to follow my data visualizations using RStudio."
+type: "widget_page"
+---
+
+---
 # An instance of the Pages widget.
 # Documentation: https://wowchemy.com/docs/page-builder/
 widget: pages
@@ -6,24 +12,24 @@ widget: pages
 # This file represents a page section.
 headless: true
 
-active: false
+active: true
 
 # Order that this section appears on the page.
 weight: 65
 
 title: Visualizations
-subtitle:
+subtitle: A place to follow my data visualizations using RStudio.
 
 content:
   # Page type to display. E.g. post, talk, publication...
   page_type: post
   # Choose how many pages you would like to display (0 = all pages)
-  count: 5
+  count: 0
   # Filter on criteria
   filters:
     author: ""
-    category: "Tidy Tuesday"
-    tag: "#TidyTuesday"
+    category: ""
+    tag: ""
     exclude_featured: false
     exclude_future: false
     exclude_past: false
@@ -39,5 +45,5 @@ design:
   #   2 = Compact
   #   3 = Card
   #   4 = Citation (publication only)
-  view: 3
+  view: 2
 ---
