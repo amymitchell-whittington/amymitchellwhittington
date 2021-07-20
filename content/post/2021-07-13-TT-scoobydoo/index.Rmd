@@ -3,7 +3,7 @@ title: "Scooby Doo monster motives"
 author: "Amy Mitchell-Whittington"
 date: 2021-07-13T21:13:14-05:00
 categories: ["Tidy Tuesday"]
-tags: ["#TidyTuesday"]
+tags: ["TidyTuesday"]
 image:
   caption: ''
   focal_point: ''
@@ -15,7 +15,7 @@ summary: My first Tidy Tuesday submission - delving into the world of data viz.
 
 These past few months I've been playing around a lot in RStudio.  
 
-I really wanted to get stuck into data visualizations, so I figured the best way would be to challenge myself weekly with [#TidyTuesday](https://github.com/rfordatascience/tidytuesday), a weekly data project in R from the R4DS community.  
+I really wanted to get stuck into data visualizations, so I figured the best way would be to challenge myself weekly with [TidyTuesday](https://github.com/rfordatascience/tidytuesday), a weekly data project in R from the R4DS community.  
 
 So, here's my first of *hopefully* many submissions. Luckily, I started off with a fun one - data from every single Scooby Doo episode and movie since 1969.  
 The dataset came from [Kaggle](https://www.kaggle.com/williamschooleman/scoobydoo-complete), manually aggregated by [plummye](https://www.kaggle.com/williamschooleman).  
