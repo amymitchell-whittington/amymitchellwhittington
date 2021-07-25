@@ -12,7 +12,7 @@ active: true
 weight: 1
 
 title: Data viz
-subtitle: A place to track my data visualizations using RStudio.
+subtitle: A place for my data visualizations using RStudio.
 
 content:
   # Page type to display. E.g. post, talk, publication...
