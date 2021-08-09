@@ -11,7 +11,7 @@ image:
 summary: 1980 had the highest percentage of Paralympic athletes who won medals in more than one sport.
 ---
 
-## The Paralympic Games
+## The Paralympic Games [</>](https://github.com/amymitchell-whittington/TidyTuesday/blob/main/2021/03-08-2021-paralympics/03-08-2021-paralympics.Rmd)  
 
 This week's Tidy Tuesday comes from the [International Paralympic Committee](https://db.ipc-services.org/sdms/hira/web/index).  The data details all medal winners from the 1980-2016 Paralympic Games.  
 
@@ -19,7 +19,7 @@ The Paralympics is the largest sports competition for athletes with an impairmen
 
 Researching the Paralympics, I found there were instances where more than one athlete was competing in not just more than one event under a type of sport (eg: competing in butterfly and breaststroke) but also competing and winning medals in more than one sport (eg: athletics and table tennis).  
 
-When I started to analyse the data, I found 692 athletes won medals in more than one sport in each of the Paralympic Games between 1980 and 2016, compared to just seven Olympic athletes in that same time period. I decided to put together a simple connected scatterplot to showcase the percentage of Paralympic athletes who won medals at each of the Games to best reflect any changes over the years. Code: [</>](https://github.com/amymitchell-whittington/TidyTuesday/blob/main/2021/03-08-2021-paralympics/03-08-2021-paralympics.Rmd)  
+When I started to analyse the data, I found 692 athletes won medals in more than one sport in each of the Paralympic Games between 1980 and 2016, compared to just seven Olympic athletes in that same time period. I decided to put together a simple connected scatterplot to showcase the percentage of Paralympic athletes who won medals at each of the Games to best reflect any changes over the years.   
 
 Interestingly, Kyung Mook Kim, representing the Republic of Korea, has [won medals at every Paralympic Games from 1992 - 2016](https://www.paralympic.org/kyung-mook-kim), in table tennis and wheelchair tennis.
 
