@@ -1,0 +1,141 @@
+---
+title: "Paralympians excelling in more than one sport" 
+author: "Amy Mitchell-Whittington"
+date: 2021-08-03T21:13:14-05:00
+categories: ["Tidy Tuesday"]
+tags: ["TidyTuesday"]
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+summary: 1980 had the highest percentage of Paralympic athletes who won medals in more than one sport.
+---
+
+## The Paralympic Games
+
+This week's Tidy Tuesday comes from the [International Paralympic Committee](https://db.ipc-services.org/sdms/hira/web/index).  It details medal-winners from the 1980-2016 Paralympic Games.  
+
+According to the IPC website, the Paralympics is the largest sports competition for athletes with an impairment worldwide. "It involves athletes from several impairment categories. The six main disability categories are: amputee, cerebral palsy, intellectual impairment, visually impaired, spinal injuries and Les Autres (French for "the others", a category that includes conditions that do not fall into the categories mentioned before.)"  
+
+Researching the data, I found there were instances where more than one athlete was competing in not just more than one event under a type of sport (eg: competing in butterfly and breaststroke) but also competing and winning medals in more than one sport (eg: athletics and table tennis).  
+
+When I started to analyse the data, I found 692 athletes won medals in more than one sport in each of the Paralympic Games between 1980 and 2016, compared to just seven Olympic athletes in that same time period. 
+
+Interestingly, Kyung Mook Kim, representing the Republic of Korea, has [won medals at every Paralympic Games from 1992 - 2016](https://www.paralympic.org/kyung-mook-kim), in table tennis and wheelchair tennis.
+
+It seems many Paralympic athletes often compete at elite levels in multiple sports at the Games.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(tidytuesdayR)
+library(dplyr)
+library(ggplot2)
+library(extrafont)
+
+athletes <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-08-03/athletes.csv')
+
+olympics <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-07-27/olympics.csv')
+
+medals <- olympics %>%
+  filter(medal != "NA")
+
+```
+
+```{r explore, include=FALSE}
+
+# number of sports each athlete won a medal across the Paralympics 1980-2016
+
+paralympics <- athletes %>%
+  group_by(year, athlete) %>%
+  summarise(count = n_distinct(type)) %>%
+  filter(count > 1,
+         athlete != "Great Britain")
+
+# number of athletes who won a medal in more than one sport by year
+
+paralympics_athlete_year <- paralympics %>%
+  group_by(year) %>%
+  summarise(athletes_by_sports = n_distinct(athlete))
+
+#number of athletes who competed by year 
+
+athlete_numbers <- athletes %>%
+  group_by(year) %>%
+  filter(athlete != "Great Britain") %>%
+  summarise(total_athletes = n_distinct(athlete)) 
+
+# join both datasets together & find percentage 
+
+paralympics_together <- left_join(paralympics_athlete_year, athlete_numbers, by="year") %>%
+  mutate(
+    percentage = athletes_by_sports/total_athletes*100
+  ) %>%
+  round(digits = 2)
+
+# total number of athletes who've won more than one medal across the Paralympic Games from 1980-2016
+
+paralmpics_number <- paralympics %>%
+  group_by(athlete) %>%
+  summarise(count = n_distinct(year))
+
+#####
+#Olympic % of athletes who won medals in more than one sport each Games
+
+olympics_athletes <- medals %>%
+  group_by(year, name) %>%
+  summarise(count = n_distinct(sport)) %>%
+  filter(count > 1,
+         year >= "1980")
+
+olympics_athlete_year <- olympics_athletes %>%
+  group_by(year) %>%
+  summarise(by_year = n_distinct(name))
+
+olympics_total <- medals %>%
+  group_by(year) %>%
+  summarise(total_athletes = n_distinct(name)) %>%
+  filter(year >= "1980")
+
+olympics_together <- left_join(olympics_athlete_year, olympics_total, by="year") %>%
+  mutate(
+    percentage = by_year/total_athletes*100
+  ) %>%
+  round(digits = 2) %>%
+  select(year, percentage)
+
+```
+
+```{r plot, echo=FALSE}
+
+ggplot(paralympics_together, 
+       aes(
+         x = year, y = percentage, type = "b"
+       )) +
+  geom_point(shape = 21,
+             colour = "#0081C8",
+             fill = "#00A651",
+             size = 4) +
+  geom_line(colour = "#EE334E") +
+  geom_text(aes(label = percentage),
+            nudge_y = 0.75,
+            colour = "#0081C8") +
+  scale_x_continuous(breaks = seq(1980, 2016, by = 4)) +
+  scale_y_continuous(breaks = seq(0, 15, by = 1)) +
+  labs(
+    x = "Year",
+    y = "% of athletes",
+    title = "Percentage of Paralympic athletes who've won medals in more than one sport",
+    subtitle = "This graph shows the percentage of athletes who won medals in more than one sport at each of the Paralympic Games",
+    caption = "Data: IPC"
+  ) +
+  theme_minimal() +
+    theme(plot.title = element_text(size = 12, hjust = 0.5)) +
+  theme(plot.subtitle = element_text (size = 8, hjust = 0.5, face = "italic")) +
+  theme(panel.border = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
+
+```
+
