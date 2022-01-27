@@ -1,6 +1,6 @@
 ---
 title: "Data visualizations"
-summary: "A place to follow my data visualizations using RStudio."
+summary: "Data visualizations I've created using RStudio."
 type: "widget_page"
 ---
 
