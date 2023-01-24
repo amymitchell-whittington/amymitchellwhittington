@@ -14,7 +14,7 @@
   #weight = 20
 
 [[main]]
-  name = "Visualizations"
+  name = "Visualisations"
   url = "visualizations/"
   weight = 3
 
