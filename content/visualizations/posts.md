@@ -11,8 +11,8 @@ active: true
 # Order that this section appears on the page.
 weight: 1
 
-title: Data viz
-subtitle: A place for my data visualizations using RStudio.
+title: Data Storytelling
+subtitle: A home for all of my data visualisations, created using RStudio.
 
 content:
   # Page type to display. E.g. post, talk, publication...

@@ -1,6 +1,6 @@
 ---
-title: "Data visualizations"
-summary: "Data visualizations I've created using RStudio."
+title: "Data visualisations"
+summary: "Data visualisations I've created using RStudio."
 type: "widget_page"
 ---
 
@@ -17,8 +17,8 @@ active: true
 # Order that this section appears on the page.
 weight: 65
 
-title: Visualizations
-subtitle: A place to follow my data visualizations using RStudio.
+title: Data Storytelling
+subtitle: A home for all of my data visualisations, created using RStudio. 
 
 content:
   # Page type to display. E.g. post, talk, publication...
