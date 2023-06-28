@@ -25,7 +25,7 @@ I was interested in the shapes that people reported, as it wasn't all just discs
 
 To get a better sense of the shapes, I decided to group them into three categories - I am not sure I really did this grouping enough justice, to be honest, but I do think it managed to simplify the shapes for a graph format. Here's my code for grouping the shapes:
 
-```{r load, echo=FALSE, include=TRUE}
+```{r install, echo=FALSE, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
 
 library(ggplot2)
@@ -38,6 +38,10 @@ library(ozmaps)
 library(readr)
 
 ufo_sightings <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-06-25/ufo_sightings.csv")
+```
+
+```{r load, echo=FALSE, include=TRUE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
 
 #sort UFO shapes sighted in Australia into three categories and sort by decade:
 
