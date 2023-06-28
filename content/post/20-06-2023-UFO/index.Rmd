@@ -72,7 +72,7 @@ df <- data.frame(ufo_aus_shape)
 print(df)
 ```
 
-I also attempted to map (for the first time) the sightings of these three shape categories to a map of Australia. I was super excited to learn how to use a map to portray data, but I think I should have used different data to map, or made it more interactive or looked at the data at state level (QLD, NSW e.t.c.,) so it was clearer where these sightings were reported.
+I also attempted to map the sightings of these three shape categories to a map of Australia. I was super excited to learn how to use a map to portray data, but I think I should have used different data to map, or made it more interactive or looked at the data at state level (QLD, NSW e.t.c.,) so it was clearer where these sightings were reported.
 
 Another fun idea I had was to overlay flight path data to the map to see if any of the reported sightings, especially light/flare sightings, were near a flight path. But that could be for another time.
 
