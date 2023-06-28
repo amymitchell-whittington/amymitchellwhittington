@@ -34,6 +34,28 @@ ufo_aus_year &lt;- ufo_sightings %&gt;%
    filter(shape != c(&quot;NA&quot;, &quot;other&quot;)) %&gt;%
   count(shape, year)</code></pre>
 <p>Alternatively, I could have put a Top 10 list together (added below), but I didn’t have time to think about how to properly visualise it.</p>
+<pre><code>##    ufo_shape   n
+## 1      light 119
+## 2     circle  62
+## 3       disk  50
+## 4   triangle  43
+## 5   fireball  34
+## 6       oval  30
+## 7    unknown  25
+## 8      other  22
+## 9  formation  20
+## 10     cigar  15
+## 11    sphere  15
+## 12       egg  12
+## 13   diamond  10
+## 14 rectangle  10
+## 15  teardrop  10
+## 16  changing   9
+## 17  cylinder   9
+## 18      cone   6
+## 19     flash   4
+## 20   chevron   3
+## 21     cross   1</code></pre>
 <p>I also attempted to map (for the first time) the sightings of these three shape categories to a map of Australia. I was super excited to learn how to use a map to portray data, but I think I should have used different data to map, or made it more interactive or looked at the data at state level (QLD, NSW e.t.c.,) so it was clearer where these sightings were reported.</p>
 <p>Another fun idea I had was to overlay flight path data to the map to see if any of the reported sightings, especially light/flare sightings, were near a flight path. But that could be for another time.</p>
 <p>Here’s my first attempt at using a map in my visualisations!</p>

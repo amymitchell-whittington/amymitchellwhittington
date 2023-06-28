@@ -59,7 +59,7 @@ ufo_aus_year <- ufo_sightings %>%
 
 Alternatively, I could have put a Top 10 list together (added below), but I didn't have time to think about how to properly visualise it.
 
-```{r explore, echo = FALSE, include=FALSE, message = FALSE, warning = FALSE}
+```{r explore, echo = FALSE, message = FALSE, warning = FALSE}
 
 ufo_aus_shape <- ufo_sightings %>%
   filter(country == "au",
