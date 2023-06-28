@@ -1,0 +1,110 @@
+---
+title: "Reported UFO Sightings in Australia" 
+author: "Amy Mitchell-Whittington"
+date: 2023-06-20
+categories: ["Tidy Tuesday"]
+tags: ["TidyTuesday"]
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+summary: Seeing shapes in the Australian sky.
+---
+
+## Reported UFO Sightings [</>](https://github.com/amymitchell-whittington/TidyTuesday/blob/main/2023/20-06-2023-UFO/20-06-2023-UFO.Rmd)  
+
+This week's Tidy Tuesday data comes from [NUFORC](https://nuforc.org/) and includes more than 80,000 recorded UFO sightings around the world. I had a lot of fun with this, especially reading some of the descriptions from reported sightings in Australia:
+
+*"It was a huge black round thing and it was leaving a green trail of smoke behind it.  It made a buzzing sound."*
+
+*"A brilliant blue-white light performs amazing acrobatics for an hour and a half over the city of Brisbane."*
+
+*"Fireballs dance in the sky over Sydney, Australia"*
+
+I was interested in the shapes that people reported, as it wasn't all just discs or flying saucers. People reported seeing eggs, triangles, formations, cigars and more.
+
+To get a better sense of the shapes, I decided to group them into three categories - I am not sure I really did this grouping enough justice, to be honest, but I do think it managed to simplify the shapes for a graph format. Here's my code for grouping the shapes:
+
+```{r load, echo=FALSE, include=TRUE}
+
+library(tidyverse)
+library(tidytuesdayR)
+library(ggplot2)
+library(ggtext)
+library(lubridate)
+library(dplyr)
+library(mapdata)
+library(sf)
+library(ozmaps)
+library(readr)
+
+ufo_sightings <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-06-25/ufo_sightings.csv")
+
+#sort UFO shapes sighted in Australia into three categories and sort by decade:
+
+ufo_aus_year <- ufo_sightings %>%
+  filter(country == "au") %>%
+  mutate(shape = case_when(
+    ufo_shape %in% c("cylinder", "cigar", "dome", "circle", "teardrop", "fireball", "egg", "sphere", "disk", "round", "oval", "crescent") ~ "Round",
+    ufo_shape %in% c("diamond", "hexagon", "rectangle", "chevron", "triangle", "cross", "pyramid", "delta", "cone") ~ "Angled",
+    ufo_shape %in% c("light", "flash", "changed", "formation", "changing", "flare") ~ "Flash or changing light")) %>%
+  select(date_time, shape, longitude, latitude) %>%
+  mutate(year = as.numeric(format(as.Date(date_time, format = "%m/%d/%Y"),"%Y"))) %>%
+   filter(shape != c("NA", "other")) %>%
+  count(shape, year)
+
+```
+
+Alternatively, I could have put a Top 10 list together (added below), but I didn't have time to think about how to properly visualise it.
+
+```{r explore, include=TRUE, echo=T}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+
+ufo_aus_shape <- ufo_sightings %>%
+  filter(country == "au",
+         ufo_shape != c("NA","other")) %>%
+  select(ufo_shape) %>%
+  count(ufo_shape) %>%
+arrange(desc(n))
+
+glimpse(ufo_aus_shape)
+```
+
+I also attempted to map (for the first time) the sightings of these three shape categories to a map of Australia. I was super excited to learn how to use a map to portray data, but I think I should have used different data to map, or made it more interactive or looked at the data at state level (QLD, NSW e.t.c.,) so it was clearer where these sightings were reported.
+
+Another fun idea I had was to overlay flight path data to the map to see if any of the reported sightings, especially light/flare sightings, were near a flight path. But that could be for another time.
+
+Here's my first attempt at using a map in my visualisations!
+
+```{r plot, echo=FALSE, message=FALSE, dpi = 300}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+
+ufo_aus_year_mapping <- ufo_sightings %>%
+  filter(country == "au") %>%
+  mutate(shape = case_when(
+    ufo_shape %in% c("cylinder", "cigar", "dome", "circle", "teardrop", "fireball", "egg", "sphere", "disk", "round", "oval", "crescent") ~ "Round",
+    ufo_shape %in% c("diamond", "hexagon", "rectangle", "chevron", "triangle", "cross", "pyramid", "delta", "cone") ~ "Angled",
+    ufo_shape %in% c("light", "flash", "changed", "formation", "changing", "flare") ~ "Flash or changing light")) %>%
+  select(shape, longitude, latitude) %>%
+   filter(shape != "NA")
+
+oz_states <- ozmaps::ozmap_states
+
+ggplot() +
+  geom_sf(data = oz_states, colour = "black", fill = NA) + 
+  geom_point(data = ufo_aus_year_mapping, mapping = aes(x = longitude, y = latitude, colour = shape)) + 
+  scale_colour_manual(name = "UFO Shape", values = c("green3", "red4", "deepskyblue")) +
+  coord_sf() + 
+  facet_wrap(~shape) +
+  theme_void() +
+  guides(fill=guide_legend(title=NULL)) +
+  theme(
+    plot.title = element_markdown(size = 13, colour = "black", face = "bold", hjust = 0.5),
+    plot.subtitle = element_text(size = 8, colour = "black", hjust = 0.5),
+    plot.caption = element_text(size = 6, colour = "black", face = "italic", hjust = 0.1),
+    plot.background = element_rect(fill = "ivory"),
+    legend.position = "none") +
+   labs(title = "Seeing Shapes in the Australian Sky",
+       subtitle = "More than 500 UFO sightings in Australia have been reported since 1960, according to data from\nthe National UFO Reporting Center. were most commonly spotted\n along the east coast of Australia...",
+       caption = "Data source: National UFO Reporting Center.")
+```
