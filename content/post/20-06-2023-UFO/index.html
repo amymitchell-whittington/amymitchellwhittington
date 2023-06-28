@@ -21,30 +21,28 @@ summary: Seeing shapes in the Australian sky.
 <p><em>“Fireballs dance in the sky over Sydney, Australia”</em></p>
 <p>I was interested in the shapes that people reported, as it wasn’t all just discs or flying saucers. People reported seeing eggs, triangles, formations, cigars and more.</p>
 <p>To get a better sense of the shapes, I decided to group them into three categories - I am not sure I really did this grouping enough justice, to be honest, but I do think it managed to simplify the shapes for a graph format. Here’s my code for grouping the shapes:</p>
-<pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-## ✔ dplyr     1.1.2     ✔ readr     2.1.4
-## ✔ forcats   1.0.0     ✔ stringr   1.5.0
-## ✔ ggplot2   3.4.2     ✔ tibble    3.2.1
-## ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
-## ✔ purrr     1.0.1     
-## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
-## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-<pre><code>## Warning: package &#39;tidytuesdayR&#39; was built under R version 4.0.5</code></pre>
-<pre><code>## Loading required package: maps
+<pre><code>## 
+## Attaching package: &#39;lubridate&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
 ## 
-## Attaching package: &#39;maps&#39;
+##     date, intersect, setdiff, union</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
 ## 
-## The following object is masked from &#39;package:purrr&#39;:
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
 ## 
-##     map</code></pre>
+##     intersect, setdiff, setequal, union</code></pre>
+<pre><code>## Loading required package: maps</code></pre>
 <pre><code>## Warning: package &#39;sf&#39; was built under R version 4.0.5</code></pre>
-<pre><code>## Linking to GEOS 3.9.1, GDAL 3.4.0, PROJ 8.1.1; sf_use_s2() is TRUE
-## Rows: 80332 Columns: 11── Column specification ────────────────────────────────────────────────────────
+<pre><code>## Linking to GEOS 3.9.1, GDAL 3.4.0, PROJ 8.1.1; sf_use_s2() is TRUE</code></pre>
+<pre><code>## Rows: 80332 Columns: 11
+## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr (8): date_time, city_area, state, country, ufo_shape, described_encounte...
 ## dbl (3): encounter_length, latitude, longitude
+## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <p>Alternatively, I could have put a Top 10 list together (added below), but I didn’t have time to think about how to properly visualise it.</p>
@@ -57,11 +55,30 @@ ufo_aus_shape &lt;- ufo_sightings %&gt;%
   count(ufo_shape) %&gt;%
 arrange(desc(n))
 
-glimpse(ufo_aus_shape)</code></pre>
-<pre><code>## Rows: 21
-## Columns: 2
-## $ ufo_shape &lt;chr&gt; &quot;light&quot;, &quot;circle&quot;, &quot;disk&quot;, &quot;triangle&quot;, &quot;fireball&quot;, &quot;oval&quot;, &quot;…
-## $ n         &lt;int&gt; 119, 62, 50, 43, 34, 30, 25, 22, 20, 15, 15, 12, 10, 10, 10,…</code></pre>
+df &lt;- data.frame(ufo_aus_shape)
+print(df)</code></pre>
+<pre><code>##    ufo_shape   n
+## 1      light 119
+## 2     circle  62
+## 3       disk  50
+## 4   triangle  43
+## 5   fireball  34
+## 6       oval  30
+## 7    unknown  25
+## 8      other  22
+## 9  formation  20
+## 10     cigar  15
+## 11    sphere  15
+## 12       egg  12
+## 13   diamond  10
+## 14 rectangle  10
+## 15  teardrop  10
+## 16  changing   9
+## 17  cylinder   9
+## 18      cone   6
+## 19     flash   4
+## 20   chevron   3
+## 21     cross   1</code></pre>
 <p>I also attempted to map (for the first time) the sightings of these three shape categories to a map of Australia. I was super excited to learn how to use a map to portray data, but I think I should have used different data to map, or made it more interactive or looked at the data at state level (QLD, NSW e.t.c.,) so it was clearer where these sightings were reported.</p>
 <p>Another fun idea I had was to overlay flight path data to the map to see if any of the reported sightings, especially light/flare sightings, were near a flight path. But that could be for another time.</p>
 <p>Here’s my first attempt at using a map in my visualisations!</p>

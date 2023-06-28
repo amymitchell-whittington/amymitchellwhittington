@@ -26,9 +26,8 @@ I was interested in the shapes that people reported, as it wasn't all just discs
 To get a better sense of the shapes, I decided to group them into three categories - I am not sure I really did this grouping enough justice, to be honest, but I do think it managed to simplify the shapes for a graph format. Here's my code for grouping the shapes:
 
 ```{r load, echo=FALSE, include=TRUE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
 
-library(tidyverse)
-library(tidytuesdayR)
 library(ggplot2)
 library(ggtext)
 library(lubridate)
@@ -67,7 +66,8 @@ ufo_aus_shape <- ufo_sightings %>%
   count(ufo_shape) %>%
 arrange(desc(n))
 
-glimpse(ufo_aus_shape)
+df <- data.frame(ufo_aus_shape)
+print(df)
 ```
 
 I also attempted to map (for the first time) the sightings of these three shape categories to a map of Australia. I was super excited to learn how to use a map to portray data, but I think I should have used different data to map, or made it more interactive or looked at the data at state level (QLD, NSW e.t.c.,) so it was clearer where these sightings were reported.
