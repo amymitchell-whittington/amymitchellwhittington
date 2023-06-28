@@ -19,42 +19,23 @@ summary: Seeing shapes in the Australian sky.
 <p><em>“It was a huge black round thing and it was leaving a green trail of smoke behind it. It made a buzzing sound.”</em></p>
 <p><em>“A brilliant blue-white light performs amazing acrobatics for an hour and a half over the city of Brisbane.”</em></p>
 <p><em>“Fireballs dance in the sky over Sydney, Australia”</em></p>
-<p>I was interested in the shapes that people reported, as it wasn’t all just discs or flying saucers. People reported seeing eggs, triangles, formations, cigars and more.</p>
+<p>I was interested in the shapes people were reporting, as it wasn’t all just discs or flying saucers. People reported seeing eggs, triangles, formations, cigars and more.</p>
 <p>To get a better sense of the shapes, I decided to group them into three categories - I am not sure I really did this grouping enough justice, to be honest, but I do think it managed to simplify the shapes for a graph format. Here’s my code for grouping the shapes:</p>
-<p>Alternatively, I could have put a Top 10 list together (added below), but I didn’t have time to think about how to properly visualise it.</p>
 <pre class="r"><code>knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
 
-ufo_aus_shape &lt;- ufo_sightings %&gt;%
-  filter(country == &quot;au&quot;,
-         ufo_shape != c(&quot;NA&quot;,&quot;other&quot;)) %&gt;%
-  select(ufo_shape) %&gt;%
-  count(ufo_shape) %&gt;%
-arrange(desc(n))
+#sort UFO shapes sighted in Australia into three categories and sort by decade:
 
-df &lt;- data.frame(ufo_aus_shape)
-print(df)</code></pre>
-<pre><code>##    ufo_shape   n
-## 1      light 119
-## 2     circle  62
-## 3       disk  50
-## 4   triangle  43
-## 5   fireball  34
-## 6       oval  30
-## 7    unknown  25
-## 8      other  22
-## 9  formation  20
-## 10     cigar  15
-## 11    sphere  15
-## 12       egg  12
-## 13   diamond  10
-## 14 rectangle  10
-## 15  teardrop  10
-## 16  changing   9
-## 17  cylinder   9
-## 18      cone   6
-## 19     flash   4
-## 20   chevron   3
-## 21     cross   1</code></pre>
+ufo_aus_year &lt;- ufo_sightings %&gt;%
+  filter(country == &quot;au&quot;) %&gt;%
+  mutate(shape = case_when(
+    ufo_shape %in% c(&quot;cylinder&quot;, &quot;cigar&quot;, &quot;dome&quot;, &quot;circle&quot;, &quot;teardrop&quot;, &quot;fireball&quot;, &quot;egg&quot;, &quot;sphere&quot;, &quot;disk&quot;, &quot;round&quot;, &quot;oval&quot;, &quot;crescent&quot;) ~ &quot;Round&quot;,
+    ufo_shape %in% c(&quot;diamond&quot;, &quot;hexagon&quot;, &quot;rectangle&quot;, &quot;chevron&quot;, &quot;triangle&quot;, &quot;cross&quot;, &quot;pyramid&quot;, &quot;delta&quot;, &quot;cone&quot;) ~ &quot;Angled&quot;,
+    ufo_shape %in% c(&quot;light&quot;, &quot;flash&quot;, &quot;changed&quot;, &quot;formation&quot;, &quot;changing&quot;, &quot;flare&quot;) ~ &quot;Flash or changing light&quot;)) %&gt;%
+  select(date_time, shape, longitude, latitude) %&gt;%
+  mutate(year = as.numeric(format(as.Date(date_time, format = &quot;%m/%d/%Y&quot;),&quot;%Y&quot;))) %&gt;%
+   filter(shape != c(&quot;NA&quot;, &quot;other&quot;)) %&gt;%
+  count(shape, year)</code></pre>
+<p>Alternatively, I could have put a Top 10 list together (added below), but I didn’t have time to think about how to properly visualise it.</p>
 <p>I also attempted to map (for the first time) the sightings of these three shape categories to a map of Australia. I was super excited to learn how to use a map to portray data, but I think I should have used different data to map, or made it more interactive or looked at the data at state level (QLD, NSW e.t.c.,) so it was clearer where these sightings were reported.</p>
 <p>Another fun idea I had was to overlay flight path data to the map to see if any of the reported sightings, especially light/flare sightings, were near a flight path. But that could be for another time.</p>
 <p>Here’s my first attempt at using a map in my visualisations!</p>
