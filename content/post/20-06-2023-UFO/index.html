@@ -21,9 +21,7 @@ summary: Seeing shapes in the Australian sky.
 <p><em>“Fireballs dance in the sky over Sydney, Australia”</em></p>
 <p>I was interested in the shapes people were reporting, as it wasn’t all just discs or flying saucers. People reported seeing eggs, triangles, formations, cigars and more.</p>
 <p>To get a better sense of the shapes, I decided to group them into three categories - I am not sure I really did this grouping enough justice, to be honest, but I do think it managed to simplify the shapes for a graph format. Here’s my code for grouping the shapes:</p>
-<pre class="r"><code>knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
-
-#sort UFO shapes sighted in Australia into three categories and sort by decade:
+<pre class="r"><code>#sort UFO shapes sighted in Australia into three categories and sort by decade:
 
 ufo_aus_year &lt;- ufo_sightings %&gt;%
   filter(country == &quot;au&quot;) %&gt;%
