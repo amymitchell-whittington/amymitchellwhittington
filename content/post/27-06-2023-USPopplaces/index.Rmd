@@ -15,7 +15,7 @@ summary: A map of all the U.S. counties / landmarks our friends are visiting for
 
 Data this week comes from the [National Map Staged Products Directory](https://prd-tnm.s3.amazonaws.com/index.html?prefix=StagedProducts/GeographicNames/) from the [US Board of Geographic Names.](https://www.usgs.gov/us-board-on-geographic-names/download-gnis-data). 
 
-This was a fun #TidyTuesday data set to work with because it timed well with some friends who flew to the U.S. last week to have an Elvis wedding in Las Vegas!
+This was a fun #TidyTuesday data set to work with because it timed well with some friends who flew to the U.S. last week to have an Elvis wedding in Las Vegas : heart :
 
 They're hiring an RV and hitting the road for a few weeks, with plans to stop at a few major national parks in the area, so I thought I would use their honeymoon travel itinerary as a guide to visualising some of this week's data. 
 
