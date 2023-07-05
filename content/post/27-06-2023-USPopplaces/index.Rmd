@@ -8,20 +8,28 @@ image:
   caption: ''
   focal_point: ''
   preview_only: no
-summary: A map of all the U.S. counties / landmarks our friends are visiting for their honeymoon.
+summary: This week's data is inspired by a honeymoon RV roadtrip! 
 ---
 
 ## U.S.Populated Places [</>](https://github.com/amymitchell-whittington/TidyTuesday/blob/main/2023/27-06-2023-USpopulatedplaces/27-06-2023USpopulatedplaces.Rmd)  
 
 Data this week comes from the [National Map Staged Products Directory](https://prd-tnm.s3.amazonaws.com/index.html?prefix=StagedProducts/GeographicNames/) from the [US Board of Geographic Names.](https://www.usgs.gov/us-board-on-geographic-names/download-gnis-data). 
 
-This was a fun #TidyTuesday data set to work with because it timed well with some friends who flew to the U.S. last week to have an Elvis wedding in Las Vegas!
+This was a fun #TidyTuesday data set to work with because it timed well with some friends who flew to the U.S. last week to have an Elvis wedding in Las Vegas 💞
 
-They're hiring an RV and hitting the road for a few weeks, with plans to stop at a few major national parks in the area, so I thought I would use their honeymoon travel itinerary as a guide to visualising some of this week's data. 
+They're renting an RV and hitting the road, with plans to stop at a few major national parks in the area, so I thought I would use their honeymoon travel itinerary as a guide to visualising this week's U.S. Populated Places data. 
 
-Using the usmap package was a little tricky, as I had to transform my data so I could plot it properly. I think after my attempt at using a different maps package to plot reported UFO sightings onto a map of Australia last week, I might need to try out ggmaps to see if it's a little more streamlined.
+Using the usmap package was a little tricky, as I had to transform my data so I could plot it properly. I think after my attempt at using a different maps package to plot reported UFO sightings in Australia last week, I might need to try out ggmaps to see if it's a little more streamlined.
 
-I ran out of time to try and tweak the plot .png, as it is a lot narrower than my previous knitted plots. I'll have to do some research into why that is and try to remedy it for next week's data.
+I had such a hard time trying to work out why there was so much blank space around my map, see here:
+
+![My old image with white space on either side of map](index_files/figure-html/old_plot.png)
+But, after A LOT OF GOOGLING, I found this: 
+
+*The Cartesian coordinate system is the most familiar, and common, type of coordinate system. Setting limits on the coordinate system will zoom the plot (like you're looking at it with a magnifying glass), and will not change the underlying data like setting limits on a scale will.* [Via this ggplot2 ref. site](https://ggplot2.tidyverse.org/index.html)
+
+So I added coord_cartesian() to my ggplot and voila! I now need to do some digging into how EXACTLY this works 😅
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
@@ -78,13 +86,14 @@ plot_usmap(include = c("CA", "AZ", "UT", "NV", "OR"),
    geom_point(data = transformed_data,
              aes(x = x, y = y),
              color = "purple", alpha = 2) +
+    coord_cartesian(expand = FALSE, clip = "off") +
     labs(title = "The RV honeymoon circuit",
-         subtitle = "A map of all the U.S. counties / landmarks our friends\nare visiting in an RV for their honeymoon.",
+         subtitle = "A map of all the U.S. counties / landmarks our friends are visiting in an RV for their honeymoon.",
       caption = "Source: US Board of Geographic Names.") +
-  theme(plot.title = element_markdown(size = 13, colour = "cornsilk", face = "bold"),
-        plot.subtitle = element_text(size = 6, colour = "cornsilk"),
+  theme(plot.title = element_markdown(size = 13, colour = "cornsilk", face = "bold", hjust = 0.5),
+        plot.subtitle = element_text(size = 7, colour = "cornsilk", hjust = 0.5),
         plot.caption = element_text(size = 6, colour = "cornsilk", face = "italic"),
-        panel.background = element_rect(fill = "darkcyan"),
         plot.background = element_rect(fill = "darkcyan"))
+
 ```
 
