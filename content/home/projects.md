@@ -13,7 +13,7 @@ active: false
 weight: 60
 
 title: Selected works
-subtitle: A collection of stories I've created across different sites.
+subtitle: A collection of stories I've written across different sites.
 
 content:
   # Page type to display. E.g. project.

@@ -18,7 +18,7 @@ active: true
 weight: 65
 
 title: Data Storytelling
-subtitle: A home for all of my data visualisations, created using RStudio. 
+subtitle: A home for all of my data visualisations, created using R. 
 
 content:
   # Page type to display. E.g. post, talk, publication...
