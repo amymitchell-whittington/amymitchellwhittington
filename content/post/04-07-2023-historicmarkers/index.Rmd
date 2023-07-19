@@ -26,7 +26,7 @@ I wanted to use percentages because I felt it was the best way to represent the 
 This was also a great way to test out the labs() annotate function and play around with positioning.
 
 
-```{r set up, echo=FALSE, dpi=300}
+```{r set up, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
 
 library(ggplot2)
