@@ -1,0 +1,105 @@
+---
+title: "U.S. Historical Markers" 
+author: "Amy Mitchell-Whittington"
+date: 2023-06-27
+categories: ["Tidy Tuesday"]
+tags: ["TidyTuesday"]
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+summary: Tracking missing historical markers in the U.S.
+---
+
+## U.S.Historical Markers [</>](https://github.com/amymitchell-whittington/TidyTuesday/blob/main/2023/04-07-2023-historicmarkers/04-07-2023-historicalmarkers.Rmd)  
+
+The data this week comes from the [Historical Marker Database USA Index.](https://www.hmdb.org/geolists.asp?c=United%20States%20of%20America)
+
+This searchable online catalogue was so fun to explore! I didn't realise there was such a thing online (probably because there are only 36 Australian markers recorded on the site compared to 183k U.S. markers).
+
+According to the database, it is *"an illustrated searchable online catalog of historical information viewed through the filter of roadside and other permanent outdoor markers, monuments, and plaques".* Anyone can contribute, either by adding new markers or updating existing marker pages. 
+
+For this Tidy Tuesday project, only the U.S. marker database was provided and what caught my eye the most was the column relating to missing markers. 
+
+I wanted to use percentages because I felt it was the best way to represent the data, and was surprised by the amount of markers that were reported or confirmed missing. I wonder what happened to them?
+
+This was also a great way to test out the labs() annotate function and play around with positioning.
+
+
+```{r set up, echo=FALSE, dpi=300}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+
+library(ggplot2)
+library(tidyverse)
+library(tidyr)
+library(ggtext)
+library(lubridate)
+library(dplyr)
+library(readr)
+library(ggrepel)
+
+historical_markers <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-07-04/historical_markers.csv')
+  
+```
+
+```{r explore, echo=FALSE, include = TRUE, message=FALSE, dpi = 300}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+
+total_markers <- historical_markers %>%
+  count(state_or_prov) %>%
+  rename(total = n)
+
+missing_markers <- historical_markers %>%
+  select(state_or_prov, missing) %>%
+  filter(missing != "NA") %>%
+  count(state_or_prov) %>%
+  rename(missing = n)
+  
+# % of markers missing (reported and confirmed) per state
+
+perc_markers <- total_markers %>%
+  left_join(missing_markers) %>%
+  filter(missing != "NA") %>%
+  mutate(percentage = (missing/total)*100) %>%
+  arrange(desc(percentage)) %>%
+  mutate(perc = round(percentage, 1))
+
+perc_markers$label <- paste0("  ",perc_markers$perc,"%")
+
+```
+
+```{r plot, echo=FALSE, message=FALSE, dpi = 300}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+
+ggplot(data = perc_markers,
+       aes(x = reorder(state_or_prov, perc), y = perc)) + #if you add a minus (-) sign to perc in reorder(), you will reverse the order.
+  geom_point(colour = "coral4") +
+  geom_segment(aes(x = state_or_prov, xend = state_or_prov, y = 0, yend = perc), colour = "cornflowerblue") + 
+    geom_text(aes(label = label), hjust = 0, size = 2, colour = "coral4") +
+  coord_flip() +
+  theme_minimal() +
+  labs(
+    title = "Missing historical markers in the U.S.",
+    subtitle = "The percentage of historical markers per state that have been reported or confirmed missing\nvia The Historical Marker Database.",
+    caption = "Source: The Historical Marker Database USA Index.",
+  ) +
+  annotate("text", x = 16, y = 7, label = "Historical markers in the U.S can be cast in metal,\ncarved on stone, or embedded in resin and often mark\nthe location of an historical event or place.", size = 3, colour = "coral4", hjust = 0) +
+  theme(
+    plot.title = element_text(size = 13, colour = "coral4", face = "bold"),
+    plot.subtitle = element_text(size = 9, colour = "coral4"),
+    plot.caption = element_text(size = 6, colour = "coral4", face = "italic"),
+    plot.background = element_rect(fill = "beige"),
+    panel.grid.major.y = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    axis.ticks.y = element_blank(),
+    axis.ticks.x = element_blank(),
+    axis.title.x = element_blank(),
+    axis.text.x = element_blank(),
+    axis.title.y = element_blank(),
+    axis.text.y = element_text(size = 7, colour = "coral4")
+  )
+
+```
+

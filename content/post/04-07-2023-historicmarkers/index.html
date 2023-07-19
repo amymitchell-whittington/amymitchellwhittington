@@ -1,0 +1,42 @@
+---
+title: "U.S. Historical Markers" 
+author: "Amy Mitchell-Whittington"
+date: 2023-06-27
+categories: ["Tidy Tuesday"]
+tags: ["TidyTuesday"]
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+summary: Tracking missing historical markers in the U.S.
+---
+
+
+
+<div id="u.s.historical-markers" class="section level2">
+<h2>U.S.Historical Markers <a href="https://github.com/amymitchell-whittington/TidyTuesday/blob/main/2023/04-07-2023-historicmarkers/04-07-2023-historicalmarkers.Rmd">&lt;/&gt;</a></h2>
+<p>The data this week comes from the <a href="https://www.hmdb.org/geolists.asp?c=United%20States%20of%20America">Historical Marker Database USA Index.</a></p>
+<p>This searchable online catalogue was so fun to explore! I didn’t realise there was such a thing online (probably because there are only 36 Australian markers recorded on the site compared to 183k U.S. markers).</p>
+<p>According to the database, it is <em>“an illustrated searchable online catalog of historical information viewed through the filter of roadside and other permanent outdoor markers, monuments, and plaques”.</em> Anyone can contribute, either by adding new markers or updating existing marker pages.</p>
+<p>For this Tidy Tuesday project, only the U.S. marker database was provided and what caught my eye the most was the column relating to missing markers.</p>
+<p>I wanted to use percentages because I felt it was the best way to represent the data, and was surprised by the amount of markers that were reported or confirmed missing. I wonder what happened to them?</p>
+<p>This was also a great way to test out the labs() annotate function and play around with positioning.</p>
+<pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+## ✔ dplyr     1.1.2     ✔ readr     2.1.4
+## ✔ forcats   1.0.0     ✔ stringr   1.5.0
+## ✔ lubridate 1.9.2     ✔ tibble    3.2.1
+## ✔ purrr     1.0.1     ✔ tidyr     1.3.0
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors
+## Rows: 42724 Columns: 17
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (13): marker_no, title, subtitle, addl_subtitle, erected_by, street_addr...
+## dbl  (4): marker_id, year_erected, latitude_minus_s, longitude_minus_w
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/plot-1.png" width="2100" /></p>
+</div>
