@@ -1,0 +1,83 @@
+---
+title: "GPT Detectors" 
+author: "Amy Mitchell-Whittington"
+date: 2023-07-18
+categories: ["Tidy Tuesday"]
+tags: ["TidyTuesday"]
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+summary: Are GPT Detectors bias towards non-native English writers?
+---
+
+
+
+<div id="gpt-detectors" class="section level2">
+<h2>GPT Detectors<a href="https://github.com/amymitchell-whittington/TidyTuesday/blob/main/2023/19-07-2023-gptdetectors/19-07-2023-gptdetectors.Rmd">&lt;/&gt;</a></h2>
+<p>The data this week comes from Simon Couch’s <a href="https://github.com/simonpcouch/detectors/">detectors R package</a>, containing predictions from various GPT detectors. The data is based on the pre-print: <a href="https://arxiv.org/abs/2304.02819">GPT Detectors Are Biased Against Non-Native English Writers</a>. Weixin Liang, Mert Yuksekgonul, Yining Mao, Eric Wu, James Zou.</p>
+<p>language model-based chatbot ChatGPT is reportedly the fastest-growing consumer application in history, after attracting <a href="https://www.reuters.com/technology/chatgpt-sets-record-fastest-growing-user-base-analyst-note-2023-02-01/">100 million active users just two months after it was launched</a>. It’s easy to see why. The ability for such models to create large amounts of content within such a short period of time has opened the door wide open in terms of boosting productivity and creativity. From building cover letters for job applications to setting up company OKRs and everything in-between, people are using it in all kinds of ways. AI is even being used to detect AI-generated content, but how accurate has it been so far?</p>
+<p>Liang et al. set out to test the accuracy of several GPT detectors:</p>
+<blockquote>
+<p><em>The study authors carried out a series of experiments passing a number of essays to different GPT detection models.
+Juxtaposing detector predictions for papers written by native and non-native English writers, the authors argue that GPT
+detectors disproportionately classify real writing from non-native English writers as AI-generated.</em></p>
+</blockquote>
+<p>From the data, I was able to determine that GPT detectors correctly identified native English writers in 97% of cases, with only 3% being misclassified as AI-generated. However, the same was not true for non-native English writing samples, which were only correctly identified in 39% of cases.</p>
+<p>Interestingly, AI incorrectly identified AI-generated content as being created by a human in 69% of cases.</p>
+<table>
+<colgroup>
+<col width="23%" />
+<col width="29%" />
+<col width="35%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">predicted_class</th>
+<th align="right">native_English_text</th>
+<th align="right">non.native_English_text</th>
+<th align="right">AI_text</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Human</td>
+<td align="right">97</td>
+<td align="right">39</td>
+<td align="right">69</td>
+</tr>
+<tr class="even">
+<td align="left">AI</td>
+<td align="right">3</td>
+<td align="right">61</td>
+<td align="right">31</td>
+</tr>
+</tbody>
+</table>
+<p>I used a waffle chart to display the data because I think it’s a great way to visualise the small number of categories and is easy to interpret and understand. This was my first waffle chart, so there was a lot of trial and error! I struggled to work out the correct variables to map at first (I kept getting a reps() error), but once that was sorted it was relatively smooth sailing.</p>
+<p>I worked out how to reformat my data by changing from a “wide” format with each variable in its own column to a “long” format, so I could facet the data correctly. Then I changed the titles</p>
+<p>I also discovered <code>theme(plot.margin = unit())</code>, which I used to change the margins of my plot.</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/plot-1.png" width="2100" /></p>
+<p>I originally opted to use the <code>iron()</code> function to knit all three waffle charts together, but it didn’t give me as much freedom to tweak and alter the plot as <code>facet_wrap()</code>, so I switched it up. I also chose not to include the AI-generated content waffle chart, because it seemed to make the chart more complicated (with the headline/subline especially) than I wanted it to be.</p>
+<pre class="r"><code>knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+
+#human and AI
+ggplot(gpt2datalong, aes(values = value, fill = predicted_class)) +
+geom_waffle(rows = 5, na.rm = FALSE, show.legend = TRUE, flip = TRUE, colour = &quot;white&quot;) +
+  facet_wrap(~measure) +
+   theme(panel.spacing.x = unit(0, &quot;npc&quot;)) +
+  theme(strip.text.x = element_text(hjust = 0.5)) +
+  coord_equal() +
+  theme_void() +
+  scale_fill_manual(values = c(&quot;sienna3&quot;, &quot;royalblue&quot;)) +
+  labs(
+    title = &quot;How accurate are GPT dectectors at correctly classifying human-written content vs. AI generated content?&quot;,
+    subtitle = &quot;&quot;,
+    fill = &quot;GPT Classification&quot;) +
+  theme(
+    plot.title = element_text(size = 8, hjust = 0),
+    plot.subtitle = element_text(size = 5, face = &quot;italic&quot;),
+    legend.title = element_text(size = 8))</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/alternate%20plots-1.png" width="2100" /></p>
+</div>
