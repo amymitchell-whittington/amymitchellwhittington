@@ -1,0 +1,102 @@
+---
+title: "Scurvy" 
+author: "Amy Mitchell-Whittington"
+date: 2023-07-18
+categories: ["Tidy Tuesday"]
+tags: ["TidyTuesday"]
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+summary: A study into the treatment of scurvy in the 18th century.
+---
+
+## Scurvy[</>](https://github.com/amymitchell-whittington/TidyTuesday/blob/main/2023/19-07-2023-gptdetectors/19-07-2023-gptdetectors.Rmd)  
+
+The data this week comes from the [medicaldata R package](https://higgi13425.github.io/medicaldata/). This is a data package from Peter Higgins, with 19 medical data sets for teaching Reproducible Medical Research with R.
+
+The specific data set I visualised this week is from a study published in 1757 in [A Treatise on the Scurvy in Three Parts, by James Lind.](https://htmlpreview.github.io/?https://github.com/higgi13425/medicaldata/blob/master/man/description_docs/scurvy_desc.html) I would suggest taking a read of Peter Higgins' post on the study, it's quite interesting.
+
+> *This data set contains 12 participants with scurvy. In 1757, it was not known that scurvy is a manifestation of vitamin C deficiency. 
+> A variety of remedies had been anecdotally reported, but Lind was the first to test different regimens of acidic substances (including citrus fruits) against each other in a randomized, controlled trial. 
+> 6 distinct therapies were tested in 12 seamen with symptomatic scurvy, who were selected for similar severity.*
+
+*Of note, there is some dispute about whether this was truly the first clinical trial, or whether it actually happened, as there are no contemporaneous corroborating accounts.*
+
+I really enjoyed reading a little into this study and the data, especially the dosage for each of the treatments. I didn't include them in the end graph, so as not to crowd out the information too much, but I'll add them here, just for interest. 
+
+Also, worth noting: Based on this study, only one of the 12 seamen showed no symptoms after treatment - he was treated with two lemons and an orange, daily.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+
+library(ggplot2)
+library(tidyverse)
+library(tidyr)
+library(dplyr)
+
+scurvy <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-07-25/scurvy.csv')
+
+```
+
+```{r explore, echo=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+
+clean_scurvy <- scurvy %>%
+  mutate(treatment = str_replace_all(treatment, "_", " ")) %>%
+ select(-c(fit_for_duty_d6, dosing_regimen_for_scurvy)) %>% 
+  pivot_longer(-c(study_id, treatment), names_to = "symptoms") %>%
+  mutate(
+  symptoms = str_replace_all(symptoms, "_", " "),
+   symptoms = str_replace_all(symptoms, "d6", "")) %>%
+  filter(value != "0_none") %>%
+  mutate_all(str_replace_all, "1_", "") %>%
+  mutate_all(str_replace_all, "2_", "") %>%
+  mutate_all(str_replace_all, "3_", "") %>%
+  mutate_all(str_replace_all, "4_", "") 
+
+table_dosage <- scurvy %>%
+  mutate(treatment = str_replace_all(treatment, "_", " ")) %>%
+  select(treatment, dosing_regimen_for_scurvy)
+
+```
+
+```{r table, echo = FALSE, results = 'asis'}
+library(knitr)
+kable(table_dosage)
+```
+
+I saw [Nicola Rennie's](https://fosstodon.org/@nrennie) wonderful visualisation for this data set and wanted to set out to recreate something similar!
+
+In terms of cleaning the data this week (it came with a lot of "_" and numbers), I familiarised myself with the ```stringr``` package, especially the ```str_replace_all()``` function, which was fun. Although, I struggled to apply this function for more than one variable to replace, so had to input manually.
+
+At first, I thought it would be fun to use the ```geom_lime()``` function (each point is the shape of a lime on a graph), but realised I couldn't map the symptom severity to the size of each lime so I scrapped that idea. I am on the lookout for a data set to use it on in the future!
+
+I wanted to try out different shapes as a way to visualise the severity of symptoms after the treatments, but given there was more than one sailor for each treatment, it meant there was an overlap of shapes, which I thought looked confusing. For example, one sailor being treated with vinegar might still have severe gum rot while another also being treated with vinegar might only have mild gum rot. 
+
+While I ended up representing the severity of symptom by size, I wasn't 100% happy with the outcome so I rearranged the y-axis so as to have cider and citrus (the two best performers) at the top.
+
+Perhaps it would have been better to signify the symptoms of each of the 12 patients. Might be something to consider with a different visualisation.
+
+```{r plot, echo=FALSE, include = TRUE, message=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+
+clean_scurvy %>%
+ggplot(aes(x = symptoms, y = factor(treatment, 
+       levels = rev(levels(factor(treatment)))))) +
+  geom_line() +
+  geom_point(aes(size = value, colour = treatment)) +
+  theme_minimal() +
+  theme(legend.position = "bottom",
+        legend.title = element_blank(),
+        axis.title = element_blank(),
+        plot.title = element_text(size = 13, colour = "black", face = "bold"),
+        plot.subtitle = element_text(size = 7, colour = "black"),
+        plot.caption = element_text(size = 6, colour = "black", face = "italic"),
+        legend.background = element_rect(colour = NA, fill = NA)) +
+  guides(colour = FALSE) + # to remove colour legend 
+ labs(title = "Treating Scurvy in the 18th Century",
+       subtitle = "In 1757, it wasn't known that scurvy was a manifestation of vitamin C deficiency. A variety of remedies had been\nanecdotally reported, but HMS Salisbury surgeon James Lind was reportedly the first to test different treatments\nagainst each other in a randomized, controlled trial. This chart shows the outcomes of six treatments\non 12 seamen with symptomatic scurvy, who were each selected for similar severity.",
+       caption = "Data source: A Treatise on the Scurvy in Three Parts, by James Lind.")
+
+```
