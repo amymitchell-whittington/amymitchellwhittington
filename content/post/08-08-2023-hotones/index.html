@@ -1,0 +1,31 @@
+---
+title: "Hot Ones" 
+author: "Amy Mitchell-Whittington"
+date: 2023-08-08
+categories: ["Tidy Tuesday"]
+tags: ["TidyTuesday"]
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+summary: What's the average Scoville rating per season?
+---
+
+
+
+<div id="hot-ones" class="section level2">
+<h2>Hot Ones<a href="https://github.com/amymitchell-whittington/TidyTuesday/blob/main/2023/08-08-2023-hotones/08-08-2023-hotones.R">&lt;/&gt;</a></h2>
+<p>The data this week comes from Wikipedia articles: <a href="https://en.wikipedia.org/wiki/Hot_Ones">Hot Ones</a> and <a href="https://en.wikipedia.org/wiki/List_of_Hot_Ones_episodes">List of Hot Ones episodes.</a></p>
+<blockquote>
+<p><em>Hot Ones is an American YouTube talk show, created by Chris Schonberger, hosted by Sean Evans and produced
+by First We Feast and Complex Media. Its basic premise involves celebrities being interviewed by Evans over a
+</em>platter of increasingly spicy chicken wings.</p>
+</blockquote>
+<p><img src="https://media.giphy.com/media/C2VHMyaMFs3whd4sMm/giphy.gif" />
+I probably watched way too many episodes of Hot Ones while creating this visualisation, which I’m not mad about. It’s a pretty funny show - I really just skipped to the end of each episode to see how everyone handled #10, the hottest wing.</p>
+<p>For my visualisation, I wanted to get an idea of whether the spice levels increased by season. Each season uses the same 10 sauces across each of it’s episodes so I didn’t need to worry about variation between episodes, just seasons. I used the sauces data to sum every 10 scoville ratings (equivalent to the 10 sauces used per season), averaged it out and then mapped to a dataframe, which I used to plot my visualisation.</p>
+<p>A point for me to remember: If I want to could every n consecutive numbers (as I did for this), I need to use <code>colSums</code>. If I want to sum every nth number, I need to use <code>rowSums</code>, but this will only work if n divides <code>length(v)</code>.</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/plot1-1.png" width="2100" /></p>
+<p>I originally wanted to see what the % change of the average scoville score was season on season, but when I mapped it out, it looked a little too complicated. I’m including it here for reference:</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/plot2-1.png" width="672" /></p>
+</div>
