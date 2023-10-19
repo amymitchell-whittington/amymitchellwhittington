@@ -18,7 +18,7 @@ interests:
 organizations:
 - name: 
   url: 
-role: JOURNALIST
+role: FREELANCE WRITER
 social:
 - icon: envelope
   icon_pack: fas
@@ -40,4 +40,4 @@ title: Amy Mitchell-Whittington
 ---
 
 
-I'm a freelance journalist currently working as a content marketing manager at a startup based in Berlin. When I'm not writing, I'm learning R and working my way through [On Food and Cooking.](https://www.goodreads.com/book/show/101255.On_Food_and_Cooking)   
+I'm a freelance writer with a passion for data storytelling. When I'm not writing, I'm working my way through [On Food and Cooking.](https://www.goodreads.com/book/show/101255.On_Food_and_Cooking)   

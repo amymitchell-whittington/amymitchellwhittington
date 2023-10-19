@@ -1,0 +1,41 @@
+---
+title: "Spam Email" 
+author: "Amy Mitchell-Whittington"
+date: 2023-08-15
+categories: ["Tidy Tuesday"]
+tags: ["TidyTuesday"]
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+summary: xx
+---
+
+## Spam Email [</>](https://github.com/amymitchell-whittington/TidyTuesday/blob/main/2023/08-08-2023-hotones/08-08-2023-hotones.R)  
+
+The data this week comes from Vincent Arel-Bundock's [Rdatasets package] (https://vincentarelbundock.github.io/Rdatasets/index.html).
+
+> *Rdatasets is a collection of 2246 datasets which were originally distributed alongside the statistical software
+> environment R and some of its add-on packages. The goal is to make these data more broadly accessible for teaching
+> *and statistical software development.
+
+We're working with the spam email dataset. This is a subset of the spam e-mail database.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+
+
+```
+
+```{r explore, echo=FALSE, include = FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+
+
+
+```
+
+```{r plot1, echo=FALSE, include = TRUE, message=FALSE, dpi = 300}
+
+
+
+```
