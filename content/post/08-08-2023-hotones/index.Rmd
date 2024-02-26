@@ -24,7 +24,7 @@ I probably watched way too many episodes of Hot Ones while creating this visuali
 
 For my visualisation, I wanted to get an idea of whether the spice levels increased by season. Each season uses the same 10 sauces across each of it's episodes so I didn't need to worry about variation between episodes, just seasons. I used the sauces data to sum every 10 scoville ratings (equivalent to the 10 sauces used per season), averaged it out and then mapped to a dataframe, which I used to plot my visualisation.
 
-A point for me to remember: If I want to count every n consecutive numbers (as I did for this), I need to use ```colSums```. If I want to sum every nth number, I need to use ```rowSums```, but this will only work if n divides ```length(v)```.
+A point to remember: If I want to count every n consecutive numbers (as I did for this), I need to use ```colSums```. If I want to sum every nth number, I need to use ```rowSums```, but this will only work if n divides ```length(v)```.
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
