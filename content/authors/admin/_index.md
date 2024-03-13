@@ -14,7 +14,7 @@ interests:
 - Data analysis
 - Open water swimming
 - Food history 
-- Watching [floral sculptors at work](https://www.newyorker.com/video/watch/the-new-yorker-documentary-the-japanese-artist-who-sends-his-work-to-space)
+- Watching [floral sculptors at work](https://www.newyorker.com/video/watch/the-new-yorker-documentary-the-japanese-artist-who-sends-his-work-to-space).
 organizations:
 - name: 
   url: 
