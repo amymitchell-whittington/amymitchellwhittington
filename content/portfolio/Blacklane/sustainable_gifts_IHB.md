@@ -6,6 +6,6 @@ image:
   focal_point: Smart
 summary: A list of changemakers from within the IHB community who offer innovative, sustainable, and inclusive products and services that have a positive social impact on our world. 
 tags: 
-- Copywriting
+- Blacklane
 title: Sustainable gift ideas from the Impact Hub Berlin community
 ---
