@@ -18,7 +18,7 @@ interests:
 organizations:
 - name: 
   url: 
-role: FREELANCE WRITER
+role: EDITOR | COPYWRITER | JOURNALIST
 social:
 - icon: envelope
   icon_pack: fas
