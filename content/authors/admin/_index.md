@@ -40,4 +40,4 @@ title: Amy Mitchell-Whittington
 ---
 
 
-I'm a detail-orientated content specialist, with several years of experience in editing, content creation, and digital strategy. When I'm not writing, I'm creating data visualisations and working my way through [On Food and Cooking.](https://www.goodreads.com/book/show/101255.On_Food_and_Cooking) or writing for my email newsletter [tuck in.](https://tuckinbyamymw.substack.com/)
+I'm a detail-orientated content specialist, with several years of experience in editing, content creation, and digital strategy. When I'm not working, I'm creating data visualisations, working my way through [On Food and Cooking,](https://www.goodreads.com/book/show/101255.On_Food_and_Cooking) or writing my fortnightly email newsletter [tuck in.](https://tuckinbyamymw.substack.com/)
