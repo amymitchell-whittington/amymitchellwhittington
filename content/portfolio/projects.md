@@ -32,8 +32,6 @@ content:
     tag: '*'
   - name: Brisbane Times
     tag: Brisbane Times
-  - name: Blank Magazine
-    tag: Blank Magazine
   - name: Copywriting
     tag: Blacklane
 
