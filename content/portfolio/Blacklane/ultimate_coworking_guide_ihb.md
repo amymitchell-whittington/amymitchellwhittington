@@ -1,11 +1,11 @@
 ---
-date: "2021-06-30 T00:00:00Z"
+date: "2025-02-13 T00:00:00Z"
 type: project
-external_link: https://blog.blacklane.com/travel/cut-through-the-noise-of-nyc-with-these-quiet-spots/
+external_link:https://berlin.impacthub.net/blog/the-ultimate-guide-to-coworking-spaces/
 image:
   focal_point: Smart
-summary: Finding a quiet place to do business in a noisy city like NYC can be a struggle. In fact, the biggest civil complaint in the city is about noise, year after year. 
+summary: Coworking spaces have transcended traditional office spaces to become hubs of innovation and collaboration, where impact entrepreneurs and changemakers converge to exchange ideas, share resources, and co-create positive change in our world.
 tags: 
 - Blacklane
-title: Cut through the noise of NYC with these quiet spots
+title: The ultimate guide to coworking spaces
 ---
