@@ -8,6 +8,6 @@ summary: Depression was the furthest thing from Susan's mind when she found out 
 tags: 
 - Brisbane Times
 
-title: 'I needed that little red light to go off': Susan Bryant on her husband's suicide
+title: "I needed that little red light to go off": Susan Bryant on her husband's suicide
 
 ---
