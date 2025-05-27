@@ -1,2 +1,2 @@
 # amymitchellwhittington
-Personal website of Amy Mitchell-Whittington
+Personal website and portfolio of Amy Mitchell-Whittington
