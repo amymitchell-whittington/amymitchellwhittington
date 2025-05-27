@@ -2,7 +2,7 @@
 type: project
 external_link: https://www.brisbanetimes.com.au/national/queensland/i-needed-that-little-red-light-to-go-off-susan-bryant-on-her-husbands-suicide-20170707-gx71sg.html 
 
-summary: Depression was the furthest thing from Susan Bryant's mind when she found out her husband had taken his own life.
+summary: Depression was the furthest thing from Susan's mind when she found out her husband had taken his own life.
 
 
 tags: 
